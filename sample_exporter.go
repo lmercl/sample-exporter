@@ -29,9 +29,10 @@ const (
 	namespace = "sampleexporter"
         subsystem = "subsystem"
 )
-var hostnameLabelValues []string
-var hostnameEnabled = prometheus.NewDesc(prometheus.BuildFQName(namespace, subsystem, "enabled"), "Is this server enabled?.", []string{"hostname"}, nil)
-
+var (
+	hostnameLabelValues []string
+	hostnameEnabled = prometheus.NewDesc(prometheus.BuildFQName(namespace, subsystem, "enabled"), "Is this server enabled?.", []string{"hostname"}, nil)
+)
 type Exporter struct {
         hostname	string
         enabled	        bool
@@ -94,9 +95,9 @@ func main() {
         http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
                 w.Write([]byte(`
                         <html>
-                        <head><title>Taikun Exporter</title></head>
+                        <head><title>Sample Exporter</title></head>
                         <body>
-                        <h1>Taikun Exporter</h1>
+                        <h1>Sample Exporter</h1>
                         <p><a href='` + *metricsPath + `'>Metrics</a></p>
                         </body>
                         </html>`))
